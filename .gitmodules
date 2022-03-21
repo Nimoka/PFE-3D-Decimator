@@ -1,0 +1,9 @@
+[submodule "Catch2"]
+	path = external/catch2
+	url = https://github.com/catchorg/Catch2.git
+[submodule "CLI11"]
+	path = external/CLI11
+	url = https://github.com/CLIUtils/CLI11.git
+[submodule "PMP"]
+	path = external/pmp
+	url = https://github.com/pmp-library/pmp-library.git
