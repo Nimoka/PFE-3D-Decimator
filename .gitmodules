@@ -4,6 +4,3 @@
 [submodule "CLI11"]
 	path = external/CLI11
 	url = https://github.com/CLIUtils/CLI11.git
-[submodule "PMP"]
-	path = external/pmp
-	url = https://github.com/pmp-library/pmp-library.git
