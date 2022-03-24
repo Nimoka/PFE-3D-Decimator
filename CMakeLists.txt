@@ -51,10 +51,19 @@ add_subdirectory(${CLI11_DIR})
 set(PMP_DIR ${ROOT_DIR}/${EXTERNAL}/pmp)
 add_subdirectory(${PMP_DIR})
 
-# tinyply ------------------------------------------------------
+# glfw ---------------------------------------------------------
 
-set(TINYPLY_DIR ${ROOT_DIR}/${EXTERNAL}/tinyply)
-include_directories(${TINYPLY_DIR})
+set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "")
+set(GLFW_BUILD_TESTS    OFF CACHE BOOL "")
+set(GLFW_BUILD_DOCS     OFF CACHE BOOL "")
+set(GLFW_INSTALL        OFF CACHE BOOL "")
+set(GLFW_DIR ${ROOT_DIR}/${EXTERNAL}/glfw)
+add_subdirectory(${GLFW_DIR})
+
+# Eigen --------------------------------------------------------
+
+set(EIGEN_DIR ${ROOT_DIR}/${EXTERNAL}/eigen3)
+include_directories(${EIGEN_DIR})
 
 # Includes =====================================================
 
@@ -75,12 +84,15 @@ file(GLOB DECIMATOR_HEADERS
 
 set(DECIMATOR_LIBRARIES
 		CLI11
-		pmp)
+		pmp
+		glfw)
 
 set(DECIMATOR_INCLUDE
 		${ROOT_DIR}/include/
 		${CLI11_DIR}
-		${PMP_DIR})
+		${PMP_DIR}
+		${GLFW_DIR}/include/
+		${EIGEN_DIR})
 
 add_executable(${DECIMATOR_NAME}
 		${DECIMATOR_SOURCES}

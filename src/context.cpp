@@ -35,17 +35,10 @@ int Context::GetRandomSeed() {
     return randomSeed;
 }
 
-void Context::SetPLYReader(PLYReader* reader) {
-    this->reader = reader;
-}
-PLYReader* Context::GetPLYReader() {
-    return reader;
-}
-
-void Context::SetMesh(Mesh* mesh) {
+void Context::SetMesh(Mesh mesh) {
     this->mesh = mesh;
 }
-Mesh* Context::GetMesh() {
+Mesh Context::GetMesh() {
     return mesh;
 }
 
@@ -54,22 +47,17 @@ CLILoader Context::GetCLI() {
 }
 
 void Context::Launch() {
-    LoadPLYFile(inputFile);
-    int newFacesNumber = mesh->nbFaces / decimationFactor;
-    mesh->DeleteEdges(mesh->nbFaces - newFacesNumber);
-    //SavePLYFile(outputFile);
-}
+    IOFlags flags = IOFlags();
+    flags.use_binary = true;
+    
+    std::cout << "Loading file '" << GetInputFile() << "'...";
+    std::cout.flush(); 
+    mesh.read(GetInputFile(), flags);
+    std::cout << "loaded, found " << mesh.n_faces() << " faces." << std::endl;
+    int newFacesNumber = mesh.n_faces() / decimationFactor;
 
-void Context::LoadPLYFile(std::string filepath) {
-	PLYReader* reader = new PLYReader(this, filepath);
-	if (reader->Load()) {
-		if (this->reader != nullptr)
-			delete this->reader;
-		this->reader = reader;
+    mesh.DeleteFaces(mesh.n_faces() - newFacesNumber);
 
-		SetMesh(reader->GetMesh());
-	} else {
-		std::cerr << "Failed to load file '" + filepath + "'." << std::endl;
-		delete reader;
-	}
+	mesh.garbage_collection();
+    mesh.write(GetOutputFile(), flags);
 }

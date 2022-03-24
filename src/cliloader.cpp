@@ -10,7 +10,7 @@ int CLILoader::LoadContext(void *c, int argc, char **argv) {
 	CLI::App app{"Decimator"};
 
 	std::string inputFile, outputFile;
-    float decimationFactor = 1;
+    float decimationFactor;
     int randomSeed = -1;
 
 	/* Set CLI options */
@@ -19,10 +19,9 @@ int CLILoader::LoadContext(void *c, int argc, char **argv) {
 			->check(CLI::ExistingFile)->check(FileWithExtension("ply"))
             ->required();
 	app.add_option("-o, --output", outputFile, "PLY file to save")
-			->check(CLI::NonexistentPath)->check(FileWithExtension("ply"))
-            ->required();
+			->check(FileWithExtension("ply"))->required();
 	app.add_option("-d", decimationFactor, "Decimation factor")
-			->check(CLI::Range(1, 1000000))->required();
+			->check(CLI::Range(1.0, 1000000.0))->required();
 	app.add_option("-s", randomSeed, "Random seed to use")
 			->check(CLI::PositiveNumber);
 

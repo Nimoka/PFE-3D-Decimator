@@ -5,7 +5,6 @@
 #include <vector>
 
 #include "cliloader.h"
-#include "plyreader.h"
 #include "mesh.h"
 
 class Context
@@ -29,11 +28,8 @@ public:
     void SetRandomSeed(int seed);
     int GetRandomSeed();
 
-    void SetPLYReader(PLYReader* reader);
-    PLYReader* GetPLYReader();
-
-    void SetMesh(Mesh* mesh);
-    Mesh* GetMesh();
+    void SetMesh(Mesh mesh);
+    Mesh GetMesh();
 
 	CLILoader GetCLI();
 
@@ -48,8 +44,7 @@ private:
     float decimationFactor = 1;
     int randomSeed = 1;
 
-    PLYReader* reader;
-    Mesh* mesh;
+    Mesh mesh;
 
 	CLILoader cli;
 };
