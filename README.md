@@ -12,6 +12,7 @@ It contains a **mesh simplifier**, to reduce the number of faces of a mesh using
 	- [Table of contents](#table-of-contents)
 	- [Dependencies](#dependencies)
 	- [Usage](#usage)
+		- [Clone the project](#clone-the-project)
 		- [Install dependencies](#install-dependencies)
 		- [Compilation](#compilation)
 		- [Tests](#tests)
@@ -39,6 +40,15 @@ Options:
                               Decimation factor
   -s INT:POSITIVE             Random seed to use
 
+
+### Clone the project
+
+- **On Linux/macOS:**
+	- Run the command:
+		```
+		git clone https://github.com/Nimoka/PFE-3D-Decimator.git --recursive
+		```
+		(Some folders are submodules, they will be cloned as well with `--recursive`.)
 
 ### Install dependencies
 
